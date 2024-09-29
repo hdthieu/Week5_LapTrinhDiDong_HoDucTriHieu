@@ -105,7 +105,7 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-
+const ChooseColorScreen = ({ navigation, route }) => {}
 
 const Stack = createNativeStackNavigator();
 
