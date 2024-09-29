@@ -5,23 +5,23 @@ import {
   Image,
   View,
   TouchableOpacity,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useState } from 'react';
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useState } from "react";
 
 // screen 1
 function HomeScreen({ navigation, route }) {
   const { productImgs, selectorColor, setSelectorColor } = route.params;
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <View style={{ flex: 1 }}>
         <Image
           style={styles.imageProduct}
           source={productImgs[selectorColor]}
         />
       </View>
-      <View style={{ flex: 1, marginTop: '15%' }}>
+      <View style={{ flex: 1, marginTop: "15%" }}>
         <View style={{ flex: 1 }}>
           <Text style={styles.style_title}>
             Điện Thoại Vsmart Joy 3 - Hàng chính hãng
@@ -30,16 +30,17 @@ function HomeScreen({ navigation, route }) {
         <View
           style={{
             flex: 4,
-            justifyContent: 'center',
-            flexDirection: 'column',
-          }}>
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <View style={styles.styleChung}>
             <View style={styles.style_Review}>
-              <Image source={require('/assets/star.png')} />
-              <Image source={require('/assets/star.png')} />
-              <Image source={require('/assets/star.png')} />
-              <Image source={require('/assets/star.png')} />
-              <Image source={require('/assets/star.png')} />
+              <Image source={require("/assets/star.png")} />
+              <Image source={require("/assets/star.png")} />
+              <Image source={require("/assets/star.png")} />
+              <Image source={require("/assets/star.png")} />
+              <Image source={require("/assets/star.png")} />
             </View>
             <View style={styles.style_Review}>
               <Text style={styles.style_txt_review}>(Xem 828 đánh giá)</Text>
@@ -47,18 +48,19 @@ function HomeScreen({ navigation, route }) {
           </View>
           <View style={styles.styleChung}>
             <View style={styles.style_Price}>
-              <Text style={styles.style_price}>1.790.000 đ</Text>{' '}
+              <Text style={styles.style_price}>1.790.000 đ</Text>{" "}
             </View>
             <View style={styles.style_Price}>
               <Text
                 style={[
                   styles.style_price,
                   {
-                    color: 'grey',
-                    textDecorationLine: 'line-through',
+                    color: "grey",
+                    textDecorationLine: "line-through",
                     fontSize: 15,
                   },
-                ]}>
+                ]}
+              >
                 1.790.000 đ
               </Text>
             </View>
@@ -69,28 +71,29 @@ function HomeScreen({ navigation, route }) {
             </View>
             <View style={{ flex: 1 }}>
               <Text>
-                <Image source={require('/assets/question.png')} />
+                <Image source={require("/assets/question.png")} />
               </Text>
             </View>
           </View>
           <View style={styles.styleChung}>
-            <Image source={require('/assets/chonmau.png')} />
+            <Image source={require("/assets/chonmau.png")} />
             <TouchableOpacity
               style={[
                 {
-                  position: 'absolute',
+                  position: "absolute",
                   flex: 1,
-                  marginTop: '2%',
+                  marginTop: "2%",
                   width: 332,
                   height: 34,
                 },
                 styles.styleChung,
               ]}
-              onPress={() => navigation.navigate('ChooseColor')}>
+              onPress={() => navigation.navigate("ChooseColor")}
+            >
               <Text>4 MÀU - CHỌN MÀU</Text>
               <Image
-                style={{ marginLeft: '10%' }}
-                source={require('/assets/Vector.png')}
+                style={{ marginLeft: "10%" }}
+                source={require("/assets/Vector.png")}
               />
             </TouchableOpacity>
           </View>
@@ -105,18 +108,92 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-const ChooseColorScreen = ({ navigation, route }) => {}
+const ChooseColorScreen = ({ navigation, route }) => {
+  const { productImgs, selectorColor, setSelectorColor } = route.params;
+  return (
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      <View style={[styles.styleChung, { paddingTop: "2%" }]}>
+        <View style={{ flex: 1 }}>
+          <Image
+            style={styles.styleImgSmallPro}
+            source={productImgs[selectorColor]}
+          />
+        </View>
+        <View style={{ flex: 2 }}>
+          <Text style={[styles.styleTxtScr2, { width: 164, height: 36 }]}>
+            Điện Thoại Vsmart Joy 3 Hàng chính hãng
+          </Text>
+        </View>
+      </View>
+
+      <View style={{ flex: 4, backgroundColor: "#C4C4C4", padding: "3%" }}>
+        <View
+          style={[
+            styles.styleTxtScr2,
+            { fontSize: 18, fontWeight: "400", flex: 0.5 },
+          ]}
+        >
+          <Text>Chọn một màu bên dưới:</Text>
+        </View>
+
+        <View
+          style={{
+            flex: 3,
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          {[
+            { colorCode: "#C5F1FB", colorName: "silver" },
+            { colorCode: "#F30D0D", colorName: "red" },
+            { colorCode: "#000000", colorName: "black" },
+            { colorCode: "#234896", colorName: "blue" },
+          ].map((item, index) => (
+            <View style={{ flex: 1 }} key={index}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: item.colorCode,
+                  width: 85,
+                  height: 80,
+                }}
+                onPress={() => {
+                  setSelectorColor(item.colorName);
+                  navigation.setParams({ selectorColor: item.colorName });
+                }}
+              />
+            </View>
+          ))}
+        </View>
+
+        <View style={[styles.view_button, { flex: 0.5 }]}>
+          <TouchableOpacity
+            style={[styles.style_button, { backgroundColor: "#1952E294" }]}
+            onPress={() =>
+              navigation.navigate("Home", {
+                productImgs,
+                selectorColor,
+                setSelectorColor,
+              })
+            }
+          >
+            <Text style={styles.buttonText}>XONG</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [selectorColor, setSelectorColor] = useState('silver');
+  const [selectorColor, setSelectorColor] = useState("silver");
 
   const productImgs = {
-    blue: require('/assets/vs_blue.png'),
-    red: require('/assets/vs_red.png'),
-    black: require('/assets/vs_black.png'),
-    silver: require('/assets/vs_silver.png'),
+    blue: require("/assets/vs_blue.png"),
+    red: require("/assets/vs_red.png"),
+    black: require("/assets/vs_black.png"),
+    silver: require("/assets/vs_silver.png"),
   };
 
   return (
@@ -147,64 +224,64 @@ const styles = StyleSheet.create({
   },
   style_Review: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   style_txt_review: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 15,
     fontWeight: 400,
   },
   style_Price: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   style_title: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 15,
     fontWeight: 700,
   },
   style_price: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 18,
     fontWeight: 700,
   },
   style_txtRe: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 12,
     fontWeight: 700,
-    color: '#FA0000',
+    color: "#FA0000",
   },
   styleChung: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    flexDirection: "row",
   },
   style_button: {
     width: 326,
     height: 44,
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: '#EE0A0A',
+    backgroundColor: "#EE0A0A",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10,
   },
   buttonText: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 20,
     fontWeight: 700,
-    color: 'white',
+    color: "white",
   },
   view_button: {
     flex: 2,
-    marginTop: '15%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: "15%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   styleImgSmallPro: {
     width: 112,
@@ -212,7 +289,7 @@ const styles = StyleSheet.create({
     left: 4,
   },
   styleTxtScr2: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 15,
     fontWeight: 400,
   },
